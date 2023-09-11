@@ -1,0 +1,30 @@
+parameters:
+- name: buildConfiguration
+  type: string
+  default: Release
+- name: projectName
+  type: string
+- name: artifactName
+  type: string
+  values:
+    - WebApp
+    - ApiApp
+
+steps:
+  - task: DotNetCoreCLI@2
+    displayName: 'dotnet build ${{ parameters.buildConfiguration }}'
+    inputs:
+      command: 'build'
+      projects: 'src/${{ parameters.projectName }}/${{ parameters.projectName }}.csproj'
+      arguments: '--configuration ${{ parameters.buildConfiguration }}'
+
+  - task: DotNetCoreCLI@2
+    displayName: 'dotnet publish ${{ parameters.buildConfiguration }}'
+    inputs:
+      command: 'publish'
+      publishWebProjects: true
+      arguments: '--configuration ${{ parameters.buildConfiguration }} --output $(Build.ArtifactStagingDirectory)'
+      modifyOutputPath: false
+      
+  - publish: $(Build.ArtifactStagingDirectory)
+    artifact: ${{ parameters.artifactName }}
