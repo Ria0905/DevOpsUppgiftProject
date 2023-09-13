@@ -15,7 +15,7 @@ namespace SampleProject.Domain.Customers.Rules
             _orderProductData = orderProductData;
         }
 
-        public bool IsBroken() => !_orderProductData.Any();
+        public bool IsBroken() => _orderProductData == null || !_orderProductData.Any();
 
         public string Message => "Order must have at least one product";
     }

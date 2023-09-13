@@ -18,7 +18,7 @@ namespace SampleProject.Domain.Customers
 
         private string _name;
 
-        private readonly List<Order> _orders;
+        internal List<Order> _orders;
 
         private bool _welcomeEmailWasSent;
 
