@@ -5,11 +5,9 @@ namespace SampleProject.Infrastructure.Emails
 {
     public class EmailSender : IEmailSender
     {
-        public async Task SendEmailAsync(EmailMessage message)
+        public Task SendEmailAsync(EmailMessage message)
         {
-            // Integration with email service.
-
-            return;
+            return Task.CompletedTask;
         }
     }
 }

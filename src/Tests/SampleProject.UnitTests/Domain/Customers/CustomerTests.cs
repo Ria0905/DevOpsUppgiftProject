@@ -29,7 +29,8 @@ namespace SampleProject.UnitTests.Domain.Customers
             // Arrange
             var customerUniquenessChecker = Substitute.For<ICustomerUniquenessChecker>();
             var email = "hermi.seprianihakefjall@yh.nackademin.se";
-            customerUniquenessChecker.IsUnique(email).Returns(true);
+            customerUniquenessChecker.IsUnique(Arg.Any<string>()).Returns(true);
+            //customerUniquenessChecker.IsUnique(email).Returns(true);
 
             string currency = "EUR";
             var orderProductData = _fixture.Build<OrderProductData>()

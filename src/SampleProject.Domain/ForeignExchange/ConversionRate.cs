@@ -18,7 +18,7 @@ namespace SampleProject.Domain.ForeignExchange
             this.Factor = factor;
         }
 
-        internal MoneyValue Convert(MoneyValue value)
+        public MoneyValue Convert(MoneyValue value)
         {
             return this.Factor * value;
         }

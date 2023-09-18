@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Net;
 using System.Threading.Tasks;
+using Castle.Components.DictionaryAdapter.Xml;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using SampleProject.Application.Customers;
 using SampleProject.Application.Customers.GetCustomerDetails;
 using SampleProject.Application.Customers.RegisterCustomer;
@@ -14,10 +16,12 @@ namespace SampleProject.API.Customers
     public class CustomersController : Controller
     {
         private readonly IMediator _mediator;
+        private readonly ILogger<CustomersController> _logger;
 
-        public CustomersController(IMediator mediator)
+        public CustomersController(IMediator mediator, ILogger<CustomersController> logger)
         {
-            this._mediator = mediator;
+            _mediator = mediator;
+            _logger = logger;
         }
 
         /// <summary>
@@ -29,6 +33,16 @@ namespace SampleProject.API.Customers
         public async Task<IActionResult> RegisterCustomer([FromBody]RegisterCustomerRequest request)
         {
            var customer = await _mediator.Send(new RegisterCustomerCommand(request.Email, request.Name));
+
+            _logger.LogTrace($"Logging Trace: {request.Name}");
+            _logger.LogDebug($"Logging Debug: {request.Name}");
+            _logger.LogInformation($"Logging Information: {request.Name}");
+            _logger.LogWarning($"Logging Warning: {request.Name}");
+            _logger.LogError($"Logging Error: {request.Name}");
+            _logger.LogCritical($"Logging Critical: {request.Name}");
+
+            throw new System.Exception("whyyr?");
+
 
            return Created(string.Empty, customer);
         }
@@ -54,4 +68,8 @@ namespace SampleProject.API.Customers
 
 
     }
+
+
+
+
 }

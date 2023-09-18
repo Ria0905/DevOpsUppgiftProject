@@ -7,7 +7,8 @@ namespace SampleProject.Infrastructure.Domain.ForeignExchanges
 {
     public class ForeignExchange : IForeignExchange
     {
-        private readonly ICacheStore _cacheStore;
+        //private readonly ICacheStore _cacheStore;
+        public ICacheStore _cacheStore;
 
         public ForeignExchange(ICacheStore cacheStore)
         {
@@ -30,7 +31,7 @@ namespace SampleProject.Infrastructure.Domain.ForeignExchanges
             return rates;
         }
 
-        private static List<ConversionRate> GetConversionRatesFromExternalApi()
+        public static List<ConversionRate> GetConversionRatesFromExternalApi() //rubah dari privat ke public
         {
             // Communication with external API. Here is only mock.
 

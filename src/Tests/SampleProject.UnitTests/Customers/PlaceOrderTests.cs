@@ -116,7 +116,7 @@ namespace SampleProject.UnitTests.Customers
             });
         }
 
-        private static List<ConversionRate> GetConversionRates()
+        internal static List<ConversionRate> GetConversionRates()
         {
 
             var conversionRates = new List<ConversionRate>();
